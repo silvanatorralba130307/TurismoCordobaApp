@@ -1,14 +1,28 @@
 # Turismo Córdoba
 
-## Descripción
+## Descripción del proyecto
 
-**Turismo Córdoba** es una aplicación móvil desarrollada con React Native y Expo. Su objetivo es presentar distintos destinos turísticos de la provincia de Córdoba mediante una interfaz simple, visual y reutilizable.
+**Turismo Córdoba** es una aplicación móvil desarrollada con React Native y Expo cuyo objetivo es brindar información sobre distintos destinos turísticos de la provincia de Córdoba.
 
-Este proyecto corresponde a la **Unidad I del Proyecto ABP** y representa la primera base de la aplicación. En las próximas unidades se podrán incorporar nuevas funcionalidades a medida que se trabajen nuevos contenidos.
+La aplicación busca facilitar a los usuarios el descubrimiento de lugares turísticos, permitiéndoles consultar información básica de diferentes destinos y, a medida que avance el proyecto, incorporar nuevas funcionalidades como búsqueda, filtros, detalle de destinos y favoritos.
+
+El proyecto se desarrollará de manera incremental durante la cursada, incorporando nuevas funcionalidades de acuerdo con los contenidos trabajados en cada unidad.
+
+---
+
+## Problemática
+
+Córdoba cuenta con una gran variedad de destinos turísticos distribuidos en diferentes regiones y valles.
+
+La aplicación busca reunir información básica sobre estos destinos en un único lugar, ofreciendo al usuario una forma sencilla de conocer diferentes opciones y, progresivamente, herramientas que faciliten la búsqueda y selección de lugares de interés.
+
+---
 
 ## Integrantes
 
 - Torralba Silvana Beatriz
+
+---
 
 ## Tecnologías utilizadas
 
@@ -16,93 +30,123 @@ Este proyecto corresponde a la **Unidad I del Proyecto ABP** y representa la pri
 - Expo
 - JavaScript
 
-## Estado actual
+---
 
-**Unidad I – Primera versión implementada.**
+## Estado actual del proyecto
 
-La aplicación cuenta con una pantalla principal que muestra destinos turísticos de Córdoba mediante tarjetas reutilizables. La información utilizada es estática y se encuentra almacenada en un archivo local.
+### Unidad I – Primera versión implementada
 
-## Requisitos de la Unidad I
+Actualmente la aplicación permite consultar un listado de destinos turísticos de la provincia de Córdoba.
 
-La versión actual incluye:
+Cada destino se presenta mediante una tarjeta que contiene:
 
-- Pantalla principal relacionada con la temática elegida.
-- Uso de `View`.
-- Uso de `Text`.
-- Uso de `Image`.
-- Uso de `ScrollView`.
-- Datos estáticos.
-- Componentes reutilizables.
-- Comunicación entre componentes mediante props.
-- Un componente reutilizable para representar los elementos de la aplicación.
+- Imagen.
+- Nombre del destino.
+- Región o valle.
+- Descripción breve.
 
-## Componente reutilizable
+En esta primera versión los datos utilizados son estáticos.
 
-### `DestinationCard`
+Actualmente se encuentran incluidos los siguientes destinos:
 
-El componente `DestinationCard` representa cada destino turístico.
+- La Cumbrecita.
+- Villa General Belgrano.
+- Mina Clavero.
+- Villa Carlos Paz.
 
-Recibe mediante **props**:
+---
 
-- `name`: nombre del destino.
-- `region`: región o valle al que pertenece.
-- `description`: descripción breve.
-- `image`: imagen del destino.
+# Features del proyecto
 
-Esto permite reutilizar la misma estructura visual con datos diferentes sin repetir código.
-
-## Features y estado
+Las Features representan funcionalidades concretas que permiten al usuario realizar una acción o consultar información dentro de la aplicación.
 
 | Feature | Estado |
 |---|---|
-| Pantalla principal | ✅ Implementado |
-| Listado de destinos | ✅ Implementado |
-| Imágenes locales | ✅ Implementado |
-| Scroll vertical | ✅ Implementado |
-| Datos estáticos | ✅ Implementado |
-| Componente reutilizable | ✅ Implementado |
-| Comunicación mediante props | ✅ Implementado |
-| Pantalla de detalle | ⏳ Previsto |
-| Buscador | ⏳ Previsto |
-| Filtros por región | ⏳ Previsto |
-| Favoritos | ⏳ Previsto |
-| Mapa | ⏳ Previsto |
-| Geolocalización | ⏳ Previsto |
+| Consultar destinos turísticos | ✅ Implementado |
+| Consultar el detalle de un destino | ⏳ Previsto |
+| Buscar destinos por nombre | ⏳ Previsto |
+| Filtrar destinos por región o valle | ⏳ Previsto |
+| Agregar destinos a favoritos | ⏳ Previsto |
+| Consultar destinos favoritos | ⏳ Previsto |
 
-## Estructura principal
+---
 
-```text
-TurismoCordobaApp/
-├── assets/
-│   └── images/
-├── components/
-│   └── DestinationCard.js
-├── data/
-│   └── destinations.js
-├── App.js
-├── app.json
-├── index.js
-├── package.json
-└── README.md
-```
+## Feature implementada actualmente
 
-## Instalación y ejecución
+### Consultar destinos turísticos
 
-1. Abrir una terminal dentro de la carpeta del proyecto.
-2. Instalar las dependencias:
+Permite al usuario visualizar un listado de diferentes destinos turísticos de la provincia de Córdoba.
 
-```bash
-npm install
-```
+Para cada destino se muestra:
 
-3. Iniciar Expo:
+- Imagen.
+- Nombre.
+- Región o valle.
+- Descripción.
 
-```bash
-npx expo start
-```
+Esta Feature constituye la funcionalidad principal implementada durante la Unidad I.
 
-4. Escanear el código QR con Expo Go o ejecutar la aplicación desde un emulador compatible.
+---
 
-## Próximas mejoras
+# Contenidos técnicos implementados – Unidad I
 
-En futuras unidades se podrán agregar navegación entre pantallas, detalle de destinos, favoritos, búsqueda, filtros y otras funcionalidades de acuerdo con los contenidos trabajados durante la cursada.
+Para desarrollar la primera versión de la aplicación se utilizaron los contenidos trabajados durante la Unidad I.
+
+### View
+
+Se utiliza para organizar y agrupar los distintos elementos visuales de la pantalla.
+
+### Text
+
+Se utiliza para mostrar:
+
+- Nombre de la aplicación.
+- Títulos.
+- Nombre de los destinos.
+- Región.
+- Descripciones.
+
+### Image
+
+Se utiliza para representar visualmente cada destino turístico mediante una fotografía.
+
+### ScrollView
+
+Permite realizar desplazamiento vertical para visualizar todos los destinos disponibles.
+
+### Datos estáticos
+
+La información de los destinos se encuentra almacenada localmente en:
+
+`data/destinations.js`
+
+En esta primera versión no se utiliza una base de datos ni una API externa.
+
+### Componentes reutilizables
+
+Se creó el componente:
+
+`DestinationCard`
+
+Este componente se reutiliza para representar todos los destinos turísticos sin necesidad de repetir la estructura de código.
+
+### Comunicación mediante props
+
+El componente `DestinationCard` recibe información desde el componente principal mediante props.
+
+Las props utilizadas son:
+
+- `name`
+- `region`
+- `description`
+- `image`
+
+Por ejemplo:
+
+```javascript
+<DestinationCard
+  name={destination.name}
+  region={destination.region}
+  description={destination.description}
+  image={destination.image}
+/>
