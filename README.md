@@ -62,7 +62,7 @@ Las Features representan funcionalidades concretas que permiten al usuario reali
 
 | Feature | Estado |
 |---|---|
-| Consultar destinos turísticos | ✅ Implementado |
+| Consultar listado de destinos turísticos | ✅ Implementado |
 | Consultar el detalle de un destino | ⏳ Previsto |
 | Buscar destinos por nombre | ⏳ Previsto |
 | Filtrar destinos por región o valle | ⏳ Previsto |
@@ -73,9 +73,9 @@ Las Features representan funcionalidades concretas que permiten al usuario reali
 
 ## Feature implementada actualmente
 
-### Consultar destinos turísticos
+### Consultar listado de destinos turísticos
 
-Permite al usuario visualizar un listado de diferentes destinos turísticos de la provincia de Córdoba.
+permite al usuario visualizar los destinos turísticos disponibles y consultar información básica de cada uno, como imagen, nombre, región y descripción.
 
 Para cada destino se muestra:
 
