@@ -99,6 +99,25 @@ export default function DetailScreen() {
           <Text style={styles.description}>
             {destination.description}
           </Text>
+          <Text style={styles.sectionTitle}>
+  Lugares para visitar
+</Text>
+
+{destination.placesToVisit.map((place) => (
+  <Text key={place} style={styles.listItem}>
+    • {place}
+  </Text>
+))}
+
+<Text style={styles.sectionTitle}>
+  Actividades
+</Text>
+
+{destination.activities.map((activity) => (
+  <Text key={activity} style={styles.listItem}>
+    • {activity}
+  </Text>
+))}
           <TouchableOpacity
   style={styles.backButton}
   onPress={() => router.push('/')}
@@ -202,6 +221,20 @@ favoriteHeart: {
   fontSize: 32,
   color: '#c62828',
   lineHeight: 32,
+},
+sectionTitle: {
+  fontSize: 20,
+  fontWeight: 'bold',
+  color: '#244c3a',
+  marginTop: 22,
+  marginBottom: 8,
+},
+
+listItem: {
+  fontSize: 15,
+  color: '#555555',
+  lineHeight: 23,
+  marginBottom: 4,
 },
 
 });

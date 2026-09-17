@@ -4,7 +4,7 @@
 
 Turismo Córdoba App es una aplicación móvil orientada a brindar información sobre distintos destinos turísticos de la provincia de Córdoba.
 
-La aplicación busca facilitar la consulta de lugares turísticos, permitiendo al usuario conocer destinos destacados, buscar destinos por nombre, consultar información detallada y marcar lugares como favoritos durante el uso de la aplicación.
+La aplicación busca facilitar la consulta de lugares turísticos, permitiendo al usuario conocer destinos destacados, buscar destinos por nombre, consultar información detallada, conocer lugares para visitar y actividades disponibles, y marcar destinos como favoritos durante el uso de la aplicación.
 
 El proyecto se desarrolla de manera incremental durante la cursada, incorporando nuevas funcionalidades a medida que se trabajan nuevos contenidos.
 
@@ -34,6 +34,8 @@ La aplicación permite:
 - Buscar destinos por nombre.
 - Seleccionar un destino mediante una tarjeta interactiva.
 - Acceder a una pantalla con el detalle del destino seleccionado.
+- Consultar lugares recomendados para visitar en cada destino.
+- Consultar actividades y propuestas recreativas.
 - Volver desde la pantalla de detalle a la pantalla principal.
 - Marcar o quitar un destino como favorito.
 - Mantener el estado de favoritos por destino mientras la aplicación permanece en ejecución.
@@ -44,6 +46,18 @@ Los destinos incluidos actualmente son:
 - La Cumbrecita.
 - Mina Clavero.
 - Villa General Belgrano.
+
+## Información disponible por destino
+
+Cada destino cuenta actualmente con:
+
+- Imagen representativa.
+- Nombre.
+- Región o valle.
+- Descripción general.
+- Lugares para visitar.
+- Actividades y propuestas recreativas.
+- Opción para agregar o quitar de favoritos.
 
 ## Clase 1 - Contenidos aplicados
 
@@ -76,6 +90,7 @@ En la segunda versión se incorporaron:
 - Icono de favorito.
 - Actualización del estado de favoritos.
 - Manejo inmutable de arrays para agregar y quitar favoritos.
+- Uso de arrays y `map()` para mostrar lugares para visitar y actividades.
 
 ## Funcionamiento del buscador
 
@@ -87,6 +102,20 @@ Por ejemplo:
 - "Carlos" muestra Villa Carlos Paz.
 
 Si no existen coincidencias, se muestra un mensaje indicando que no se encontraron destinos.
+
+## Detalle de los destinos
+
+Al seleccionar una tarjeta, el usuario accede a una pantalla de detalle.
+
+En esta pantalla puede consultar:
+
+- Nombre del destino.
+- Región o valle.
+- Imagen.
+- Descripción.
+- Lugares recomendados para visitar.
+- Actividades disponibles.
+- Estado de favorito.
 
 ## Funcionamiento de favoritos
 
