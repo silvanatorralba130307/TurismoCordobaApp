@@ -1,10 +1,18 @@
-import { Image, ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
+import {
+  Image,
+  ImageSourcePropType,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 type DestinationCardProps = {
   name: string;
   region: string;
   description: string;
   image: ImageSourcePropType;
+  onPress: () => void;
 };
 
 export default function DestinationCard({
@@ -12,9 +20,14 @@ export default function DestinationCard({
   region,
   description,
   image,
+  onPress,
 }: DestinationCardProps) {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity
+  style={styles.card}
+  onPress={onPress}
+  activeOpacity={0.8}
+>
       <Image source={image} style={styles.image} />
 
       <View style={styles.content}>
@@ -22,7 +35,7 @@ export default function DestinationCard({
         <Text style={styles.region}>{region}</Text>
         <Text style={styles.description}>{description}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

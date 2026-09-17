@@ -4,9 +4,9 @@
 
 Turismo Córdoba App es una aplicación móvil orientada a brindar información sobre distintos destinos turísticos de la provincia de Córdoba.
 
-La aplicación busca facilitar la consulta de lugares turísticos, permitiendo al usuario conocer destinos destacados, su ubicación dentro de los distintos valles de la provincia, una breve descripción y una imagen representativa.
+La aplicación busca facilitar la consulta de lugares turísticos, permitiendo al usuario conocer destinos destacados, buscar destinos por nombre, consultar información detallada y marcar lugares como favoritos durante el uso de la aplicación.
 
-El proyecto será desarrollado de manera incremental durante la cursada, incorporando nuevas funcionalidades a medida que se trabajen nuevos contenidos.
+El proyecto se desarrolla de manera incremental durante la cursada, incorporando nuevas funcionalidades a medida que se trabajan nuevos contenidos.
 
 ## Integrante
 
@@ -17,22 +17,26 @@ El proyecto será desarrollado de manera incremental durante la cursada, incorpo
 | Feature | Estado |
 |---|---|
 | Consultar listado de destinos turísticos | Implementado |
-| Consultar el detalle de un destino turístico | Previsto |
-| Buscar destinos por nombre | Previsto |
+| Consultar el detalle de un destino turístico | Implementado |
+| Buscar destinos por nombre | Implementado |
 | Filtrar destinos por región o valle | Previsto |
-| Agregar destinos a favoritos | Previsto |
-| Consultar destinos favoritos | Previsto |
+| Agregar o quitar destinos de favoritos | Implementado |
+| Consultar una lista de destinos favoritos | Previsto |
 
 ## Estado actual del proyecto
 
-Actualmente se encuentra implementada la primera versión correspondiente a la Unidad I.
+Actualmente se encuentra implementada la segunda versión del proyecto, correspondiente a los contenidos trabajados hasta la Clase 2.
 
-La aplicación permite consultar un listado de destinos turísticos de Córdoba mediante tarjetas que muestran:
+La aplicación permite:
 
-- Imagen del destino.
-- Nombre.
-- Región o valle.
-- Descripción.
+- Consultar un listado de destinos turísticos de Córdoba.
+- Visualizar imagen, nombre, región y descripción de cada destino.
+- Buscar destinos por nombre.
+- Seleccionar un destino mediante una tarjeta interactiva.
+- Acceder a una pantalla con el detalle del destino seleccionado.
+- Volver desde la pantalla de detalle a la pantalla principal.
+- Marcar o quitar un destino como favorito.
+- Mantener el estado de favoritos por destino mientras la aplicación permanece en ejecución.
 
 Los destinos incluidos actualmente son:
 
@@ -41,9 +45,9 @@ Los destinos incluidos actualmente son:
 - Mina Clavero.
 - Villa General Belgrano.
 
-## Contenidos aplicados en la primera versión
+## Clase 1 - Contenidos aplicados
 
-En esta primera etapa se implementaron los siguientes contenidos trabajados en la materia:
+En la primera versión se implementaron:
 
 - View.
 - Text.
@@ -53,7 +57,44 @@ En esta primera etapa se implementaron los siguientes contenidos trabajados en l
 - Componentes reutilizables.
 - Comunicación entre componentes mediante props.
 
-Se creó el componente reutilizable `DestinationCard`, utilizado para representar cada destino turístico de la aplicación.
+Se creó el componente reutilizable `DestinationCard`, utilizado para representar cada destino turístico.
+
+## Clase 2 - Contenidos aplicados
+
+En la segunda versión se incorporaron:
+
+- `useState` para manejo de estado.
+- `useEffect` para actualizar información según el destino seleccionado.
+- `TextInput` para búsqueda de destinos.
+- `FlatList` para mostrar el listado de destinos.
+- `data`, `keyExtractor` y `renderItem`.
+- `TouchableOpacity` para tarjetas y botones interactivos.
+- Navegación entre pantallas mediante Expo Router.
+- Paso de parámetros entre pantallas.
+- Pantalla de detalle de destinos.
+- Botón para volver al inicio.
+- Icono de favorito.
+- Actualización del estado de favoritos.
+- Manejo inmutable de arrays para agregar y quitar favoritos.
+
+## Funcionamiento del buscador
+
+El usuario puede ingresar parte del nombre de un destino en el campo de búsqueda.
+
+Por ejemplo:
+
+- "Mina" muestra Mina Clavero.
+- "Carlos" muestra Villa Carlos Paz.
+
+Si no existen coincidencias, se muestra un mensaje indicando que no se encontraron destinos.
+
+## Funcionamiento de favoritos
+
+Desde la pantalla de detalle, el usuario puede marcar o quitar un destino como favorito.
+
+Cada destino mantiene su propio estado de favorito mientras la aplicación permanece en ejecución.
+
+Actualmente los favoritos son temporales y no se almacenan de forma permanente al cerrar o reiniciar la aplicación.
 
 ## Tecnologías utilizadas
 
@@ -61,3 +102,4 @@ Se creó el componente reutilizable `DestinationCard`, utilizado para representa
 - Expo.
 - Expo Router.
 - TypeScript.
+- Expo Symbols.
