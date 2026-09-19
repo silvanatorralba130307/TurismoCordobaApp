@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import { SymbolView } from 'expo-symbols';
 
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -16,25 +14,26 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { destinations } from '../data/destinations';
-import {
-  isDestinationFavorite,
-  toggleDestinationFavorite,
-} from '../data/favorites';
+import { useFavoritesStore } from '../store/favoritesStore';
 
 export default function DetailScreen() {
   const { id } = useLocalSearchParams<{ id?: string }>();
   const router = useRouter();
-  const [isFavorite, setIsFavorite] = useState(false);
-  
-  useEffect(() => {
-  if (id) {
-    setIsFavorite(isDestinationFavorite(Number(id)));
-  }
-}, [id]);
-  
+  const favoriteIds = useFavoritesStore(
+  (state) => state.favoriteIds
+);
+
+const toggleFavorite = useFavoritesStore(
+  (state) => state.toggleFavorite
+);
+
   const destination = destinations.find(
     (item) => item.id === Number(id)
   );
+
+  const isFavorite = destination
+  ? favoriteIds.includes(destination.id)
+  : false;
 
   if (!destination) {
     return (
@@ -67,14 +66,11 @@ export default function DetailScreen() {
             {destination.region}
           </Text>
           <TouchableOpacity
+          
   style={styles.favoriteButton}
-  onPress={() => {
-  const newFavoriteState = toggleDestinationFavorite(
-    destination.id
-  );
 
-  setIsFavorite(newFavoriteState);
-}}
+  onPress={() => toggleFavorite(destination.id)}
+
   activeOpacity={0.8}
 >
   {isFavorite ? (

@@ -21,13 +21,11 @@ El proyecto se desarrolla de manera incremental durante la cursada, incorporando
 | Buscar destinos por nombre | Implementado |
 | Filtrar destinos por región o valle | Previsto |
 | Agregar o quitar destinos de favoritos | Implementado |
-| Consultar una lista de destinos favoritos | Previsto |
+| Consultar una lista de destinos favoritos | Implementado |
 
 ## Estado actual del proyecto
 
-Actualmente se encuentra implementada la segunda versión del proyecto, correspondiente a los contenidos trabajados hasta la Clase 2.
-
-La aplicación permite:
+Actualmente la aplicación permite:
 
 - Consultar un listado de destinos turísticos de Córdoba.
 - Visualizar imagen, nombre, región y descripción de cada destino.
@@ -36,9 +34,10 @@ La aplicación permite:
 - Acceder a una pantalla con el detalle del destino seleccionado.
 - Consultar lugares recomendados para visitar en cada destino.
 - Consultar actividades y propuestas recreativas.
-- Volver desde la pantalla de detalle a la pantalla principal.
 - Marcar o quitar un destino como favorito.
-- Mantener el estado de favoritos por destino mientras la aplicación permanece en ejecución.
+- Consultar una pantalla con los destinos marcados como favoritos.
+- Compartir el estado de favoritos entre distintas pantallas mediante Zustand.
+- Volver desde la pantalla de detalle a la pantalla principal.
 
 Los destinos incluidos actualmente son:
 
@@ -88,9 +87,26 @@ En la segunda versión se incorporaron:
 - Pantalla de detalle de destinos.
 - Botón para volver al inicio.
 - Icono de favorito.
-- Actualización del estado de favoritos.
-- Manejo inmutable de arrays para agregar y quitar favoritos.
 - Uso de arrays y `map()` para mostrar lugares para visitar y actividades.
+
+## Clase 3 - Estado global con Zustand
+
+En esta etapa se incorporó Zustand para administrar el estado global de favoritos.
+
+Se implementaron:
+
+- Instalación y configuración de Zustand.
+- Creación de un store global de favoritos.
+- Uso de `create()` para crear el store.
+- Uso de `set()` para actualizar el estado.
+- Array global de identificadores de destinos favoritos.
+- Acción para agregar o quitar destinos de favoritos.
+- Acceso al mismo estado desde distintas pantallas.
+- Eliminación del manejo anterior de favoritos mediante estado local.
+- Nueva pantalla de favoritos.
+- Visualización de destinos favoritos mediante `FlatList`.
+
+Gracias al uso de Zustand, la pantalla de detalle y la pantalla de favoritos pueden acceder directamente al mismo estado sin necesidad de pasar props entre componentes.
 
 ## Funcionamiento del buscador
 
@@ -119,11 +135,15 @@ En esta pantalla puede consultar:
 
 ## Funcionamiento de favoritos
 
-Desde la pantalla de detalle, el usuario puede marcar o quitar un destino como favorito.
+Desde la pantalla de detalle, el usuario puede agregar o quitar un destino de favoritos.
 
-Cada destino mantiene su propio estado de favorito mientras la aplicación permanece en ejecución.
+El estado de favoritos se administra mediante un store global creado con Zustand.
 
-Actualmente los favoritos son temporales y no se almacenan de forma permanente al cerrar o reiniciar la aplicación.
+La pantalla de Favoritos consulta el mismo store y muestra únicamente los destinos que fueron seleccionados.
+
+Si el usuario quita un destino de favoritos, la lista se actualiza automáticamente.
+
+Actualmente los favoritos se mantienen mientras la aplicación permanece en ejecución y no se almacenan de forma permanente al cerrar o reiniciar la aplicación.
 
 ## Tecnologías utilizadas
 
@@ -132,3 +152,4 @@ Actualmente los favoritos son temporales y no se almacenan de forma permanente a
 - Expo Router.
 - TypeScript.
 - Expo Symbols.
+- Zustand.
