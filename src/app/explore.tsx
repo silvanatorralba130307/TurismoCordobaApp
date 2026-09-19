@@ -1,8 +1,13 @@
+import { useQuery } from '@tanstack/react-query';
+
+import { useEffect, useRef } from 'react';
+
 import { SymbolView } from 'expo-symbols';
 
 import { useLocalSearchParams, useRouter } from 'expo-router';
 
 import {
+  ActivityIndicator,
   Image,
   ScrollView,
   StyleSheet,
@@ -14,11 +19,18 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { destinations } from '../data/destinations';
+
+import {
+  fetchWeather,
+  getWeatherDescription,
+} from '../services/weather';
+
 import { useFavoritesStore } from '../store/favoritesStore';
 
 export default function DetailScreen() {
   const { id } = useLocalSearchParams<{ id?: string }>();
   const router = useRouter();
+  const scrollRef = useRef<ScrollView>(null);
   const favoriteIds = useFavoritesStore(
   (state) => state.favoriteIds
 );
@@ -30,6 +42,27 @@ const toggleFavorite = useFavoritesStore(
   const destination = destinations.find(
     (item) => item.id === Number(id)
   );
+
+  useEffect(() => {
+  scrollRef.current?.scrollTo({
+    y: 0,
+    animated: false,
+  });
+}, [destination?.id]);
+
+const {
+  data: weather,
+  isLoading: weatherLoading,
+  error: weatherError,
+} = useQuery({
+  queryKey: ['weather', destination?.id],
+  queryFn: () =>
+    fetchWeather(
+      destination!.latitude,
+      destination!.longitude
+    ),
+  enabled: !!destination,
+});
 
   const isFavorite = destination
   ? favoriteIds.includes(destination.id)
@@ -51,7 +84,10 @@ const toggleFavorite = useFavoritesStore(
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        ref={scrollRef}
+        showsVerticalScrollIndicator={false}
+      >
         <Image
           source={destination.image}
           style={styles.image}
@@ -66,7 +102,7 @@ const toggleFavorite = useFavoritesStore(
             {destination.region}
           </Text>
           <TouchableOpacity
-          
+
   style={styles.favoriteButton}
 
   onPress={() => toggleFavorite(destination.id)}
@@ -114,6 +150,40 @@ const toggleFavorite = useFavoritesStore(
     • {activity}
   </Text>
 ))}
+
+<Text style={styles.sectionTitle}>
+  Clima actual
+</Text>
+
+{weatherLoading && (
+  <ActivityIndicator size="large" />
+)}
+
+{weatherError && (
+  <Text style={styles.weatherError}>
+    No se pudo obtener el clima en este momento.
+  </Text>
+)}
+
+{weather && (
+  <View style={styles.weatherContainer}>
+    <Text style={styles.weatherCondition}>
+      {getWeatherDescription(weather.weatherCode)}
+    </Text>
+    <Text style={styles.weatherTemperature}>
+      {Math.round(weather.temperature)} °C
+    </Text>
+
+    <Text style={styles.weatherText}>
+      Sensación térmica: {Math.round(weather.apparentTemperature)} °C
+    </Text>
+
+    <Text style={styles.weatherText}>
+      Viento: {weather.windSpeed} km/h
+    </Text>
+  </View>
+)}
+
           <TouchableOpacity
   style={styles.backButton}
   onPress={() => router.push('/')}
@@ -232,5 +302,41 @@ listItem: {
   lineHeight: 23,
   marginBottom: 4,
 },
+
+weatherContainer: {
+  backgroundColor: '#ffffff',
+  padding: 16,
+  borderRadius: 12,
+  marginTop: 5,
+  marginBottom: 10,
+},
+
+weatherCondition: {
+  fontSize: 18,
+  fontWeight: '600',
+  color: '#244c3a',
+  marginBottom: 8,
+},
+
+weatherTemperature: {
+  fontSize: 28,
+  fontWeight: 'bold',
+  color: '#244c3a',
+  marginBottom: 8,
+},
+
+weatherText: {
+  fontSize: 15,
+  color: '#555555',
+  marginBottom: 5,
+},
+
+weatherError: {
+  fontSize: 15,
+  color: '#a33a3a',
+  marginTop: 5,
+  marginBottom: 10,
+},
+
 
 });

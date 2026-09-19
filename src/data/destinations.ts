@@ -6,6 +6,8 @@ export const destinations = [
     description:
       'Uno de los destinos turísticos más visitados de Córdoba, reconocido por el lago San Roque, su costanera y su amplia propuesta recreativa.',
     image: require('../../assets/images/carlos-paz.png'),
+    latitude: -31.4184,
+    longitude: -64.4937,
 
     placesToVisit: [
       'Reloj Cucú',
@@ -31,6 +33,8 @@ export const destinations = [
     description:
       'Un pueblo peatonal rodeado de sierras, bosques y arroyos. Ideal para caminar y disfrutar de la naturaleza.',
     image: require('../../assets/images/la-cumbrecita.png'),
+    latitude: -31.90049,
+    longitude: -64.77293,
 
     placesToVisit: [
       'La Olla',
@@ -56,6 +60,8 @@ export const destinations = [
     description:
       'Destino serrano reconocido por sus ríos de aguas cristalinas, playas naturales y paisajes de las Sierras Grandes.',
     image: require('../../assets/images/mina-clavero.png'),
+    latitude: -31.72095,
+    longitude: -65.00388,
 
     placesToVisit: [
       'Río Mina Clavero',
@@ -81,6 +87,8 @@ export const destinations = [
     description:
       'Localidad de fuerte identidad centroeuropea, conocida por su arquitectura, gastronomía y la tradicional Oktoberfest.',
     image: require('../../assets/images/villa-general-belgrano.png'),
+    latitude: -31.97649,
+    longitude: -64.55902,
 
     placesToVisit: [
       'Pozo Verde',
