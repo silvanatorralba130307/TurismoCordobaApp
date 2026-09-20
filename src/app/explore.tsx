@@ -9,6 +9,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
   ActivityIndicator,
   Image,
+  Linking,
   ScrollView,
   StyleSheet,
   Text,
@@ -42,6 +43,36 @@ const toggleFavorite = useFavoritesStore(
   const destination = destinations.find(
     (item) => item.id === Number(id)
   );
+
+  const openHotels = () => {
+    if (!destination) return;
+
+  const query = `hoteles mejor valorados en ${destination.name}`;
+
+  Linking.openURL(
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`
+  );
+};
+
+const openRestaurants = () => {
+  if (!destination) return;
+
+  const query = `restaurantes mejor valorados en ${destination.name}`;
+
+  Linking.openURL(
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`
+  );
+};
+
+const openPlace = (place: string) => {
+  if (!destination) return;
+
+  const query = `${place}, ${destination.name}, Córdoba`;
+
+  Linking.openURL(
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`
+  );
+};
 
   useEffect(() => {
   scrollRef.current?.scrollTo({
@@ -135,10 +166,15 @@ const {
   Lugares para visitar
 </Text>
 
-{destination.placesToVisit.map((place) => (
-  <Text key={place} style={styles.listItem}>
-    • {place}
-  </Text>
+{destination.placesToVisit.map((place, index) => (
+  <TouchableOpacity
+    key={index}
+    onPress={() => openPlace(place)}
+  >
+    <Text style={styles.listItem}>
+      📍 {place}
+    </Text>
+  </TouchableOpacity>
 ))}
 
 <Text style={styles.sectionTitle}>
@@ -150,6 +186,28 @@ const {
     • {activity}
   </Text>
 ))}
+
+<Text style={styles.sectionTitle}>
+  Servicios cercanos
+</Text>
+
+<TouchableOpacity
+  style={styles.serviceButton}
+  onPress={openHotels}
+>
+  <Text style={styles.serviceButtonText}>
+    🏨 Buscar hospedajes
+  </Text>
+</TouchableOpacity>
+
+<TouchableOpacity
+  style={styles.serviceButton}
+  onPress={openRestaurants}
+>
+  <Text style={styles.serviceButtonText}>
+    🍽️ Dónde comer
+  </Text>
+</TouchableOpacity>
 
 <Text style={styles.sectionTitle}>
   Clima actual
@@ -338,5 +396,20 @@ weatherError: {
   marginBottom: 10,
 },
 
+serviceButton: {
+  backgroundColor: '#244c3a',
+  paddingVertical: 14,
+  paddingHorizontal: 16,
+  borderRadius: 12,
+  marginTop: 5,
+  marginBottom: 10,
+  alignItems: 'center',
+},
+
+serviceButtonText: {
+  color: '#ffffff',
+  fontSize: 16,
+  fontWeight: '600',
+},
 
 });

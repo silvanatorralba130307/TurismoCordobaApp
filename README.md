@@ -23,6 +23,7 @@ El proyecto se desarrolla de manera incremental durante la cursada, incorporando
 | Agregar o quitar destinos de favoritos | Implementado |
 | Consultar una lista de destinos favoritos | Implementado |
 | Consultar el clima actual de un destino | Implementado |
+| Consultar hospedajes, restaurantes y lugares turísticos en Google Maps | Implementado |
 
 ## Estado actual del proyecto
 
@@ -140,6 +141,20 @@ Se implementaron:
 
 Cada destino utiliza sus propias coordenadas de latitud y longitud para obtener la información meteorológica correspondiente.
 
+### Linking
+
+Se incorporó `Linking` de React Native para abrir búsquedas externas en Google Maps desde la aplicación.
+
+Se implementaron:
+
+- Búsqueda de hospedajes del destino seleccionado.
+- Búsqueda de restaurantes y lugares para comer.
+- Apertura en Google Maps de los lugares turísticos que ya aparecen en el detalle de cada destino.
+- Generación dinámica de las búsquedas utilizando el nombre del destino.
+- Uso de `Linking.openURL()` para abrir Google Maps desde la aplicación.
+
+De esta manera, el usuario puede consultar información turística dentro de la aplicación y, cuando necesita ampliar la búsqueda, acceder directamente a Google Maps.
+
 ## Funcionamiento del buscador
 
 El usuario puede ingresar parte del nombre de un destino en el campo de búsqueda.
@@ -208,5 +223,6 @@ Cada destino utiliza una `queryKey` diferente, permitiendo que TanStack Query ad
 - Expo Symbols.
 - Zustand.
 - TanStack Query.
+- Linking.
 - Open-Meteo API.
 
