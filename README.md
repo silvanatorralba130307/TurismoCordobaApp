@@ -19,11 +19,15 @@ El proyecto se desarrolla de manera incremental durante la cursada, incorporando
 | Consultar listado de destinos turísticos | Implementado |
 | Consultar el detalle de un destino turístico | Implementado |
 | Buscar destinos por nombre | Implementado |
-| Filtrar destinos por región o valle | Previsto |
+| Filtrar destinos por región o valle | Pendiente |
 | Agregar o quitar destinos de favoritos | Implementado |
 | Consultar una lista de destinos favoritos | Implementado |
 | Consultar el clima actual de un destino | Implementado |
 | Consultar hospedajes, restaurantes y lugares turísticos en Google Maps | Implementado |
+
+## Features pendientes
+
+- Filtrar destinos por región o valle.
 
 ## Estado actual del proyecto
 
