@@ -56,6 +56,7 @@ Los destinos incluidos actualmente son:
 - Villa General Belgrano.
 - Capilla del Monte.
 - Alta Gracia.
+- Miramar de Ansenuza.
 
 ## Información disponible por destino
 

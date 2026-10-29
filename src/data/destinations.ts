@@ -160,4 +160,31 @@ export const destinations = [
   ],
 },
 
+{
+  id: 7,
+  name: 'Miramar de Ansenuza',
+  region: 'Región de Ansenuza',
+  description:
+    'Destino ubicado a orillas de la Laguna Mar Chiquita, reconocido por sus flamencos, atardeceres, museos y actividades vinculadas a la naturaleza y al turismo sustentable.',
+  image: require('../../assets/images/miramar-de-ansenuza.png'),
+  latitude: -30.9147,
+  longitude: -62.67,
+
+  placesToVisit: [
+    'Laguna Mar Chiquita',
+    'Costanera de Miramar',
+    'Museo Hotel Viena',
+    'Museo de Ciencias Naturales Aníbal Montes',
+    'Capilla Museo San Antonio',
+  ],
+
+  activities: [
+    'Realizar avistaje de flamencos y aves acuáticas',
+    'Recorrer la costanera a pie o en bicicleta',
+    'Realizar paseos en lancha por la laguna',
+    'Practicar deportes náuticos',
+    'Visitar museos y sitios históricos',
+  ],
+},
+
 ];
