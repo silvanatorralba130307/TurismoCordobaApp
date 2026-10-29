@@ -4,6 +4,7 @@ import * as Location from 'expo-location';
 
 import {
   FlatList,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -40,8 +41,18 @@ const calculateDistance = (
   return R * c;
 };
 
+const regions = [
+  'Todos',
+  'Valle de Punilla',
+  'Valle de Calamuchita',
+  'Valle de Traslasierra',
+  'Valle de Paravachasca',
+  'Región de Ansenuza',
+];
+
 export default function HomeScreen() {
   const [search, setSearch] = useState('');
+  const [selectedRegion, setSelectedRegion] = useState('Todos');
   const [nearestDestination, setNearestDestination] = useState<string | null>(null);
   const router = useRouter();
 
@@ -79,9 +90,17 @@ setNearestDestination(
 };
   
   
-  const filteredDestinations = destinations.filter((destination) =>
-    destination.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredDestinations = destinations.filter((destination) => {
+  const matchesSearch = destination.name
+    .toLowerCase()
+    .includes(search.toLowerCase());
+
+  const matchesRegion =
+    selectedRegion === 'Todos' ||
+    destination.region === selectedRegion;
+
+  return matchesSearch && matchesRegion;
+});
 
   return (
     <SafeAreaView style={styles.container}>
@@ -132,6 +151,33 @@ setNearestDestination(
     Destino más cercano: {nearestDestination}
   </Text>
 )}
+
+<ScrollView
+  horizontal
+  showsHorizontalScrollIndicator={false}
+  style={styles.regionFilters}
+>
+  {regions.map((region) => (
+    <TouchableOpacity
+      key={region}
+      style={[
+        styles.regionButton,
+        selectedRegion === region && styles.regionButtonActive,
+      ]}
+      onPress={() => setSelectedRegion(region)}
+    >
+      <Text
+        style={[
+          styles.regionButtonText,
+          selectedRegion === region && styles.regionButtonTextActive,
+        ]}
+      >
+        {region}
+      </Text>
+    </TouchableOpacity>
+  ))}
+</ScrollView>
+
       <TextInput
         style={styles.searchInput}
         placeholder="Buscar destino..."
@@ -234,4 +280,34 @@ nearestDestinationText: {
   marginBottom: 12,
   textAlign: 'center',
 },
+
+regionFilters: {
+  marginBottom: 15,
+},
+
+regionButton: {
+  backgroundColor: '#ffffff',
+  borderWidth: 1,
+  borderColor: '#cbd8d2',
+  paddingVertical: 10,
+  paddingHorizontal: 14,
+  borderRadius: 20,
+  marginRight: 8,
+},
+
+regionButtonActive: {
+  backgroundColor: '#244c3a',
+  borderColor: '#244c3a',
+},
+
+regionButtonText: {
+  color: '#244c3a',
+  fontSize: 14,
+  fontWeight: '500',
+},
+
+regionButtonTextActive: {
+  color: '#ffffff',
+},
+
 });

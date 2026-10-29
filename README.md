@@ -25,10 +25,11 @@ El proyecto se desarrolla de manera incremental durante la cursada, incorporando
 | Consultar el clima actual de un destino | Implementado |
 | Consultar hospedajes, restaurantes y lugares turísticos en Google Maps | Implementado |
 | Consultar el destino más cercano según la ubicación actual | Implementado |
+| Filtrar destinos por región o valle | Implementado |
 
 ## Features pendientes
 
-- Filtrar destinos por región o valle.
+Actualmente no hay features pendientes de las planificadas inicialmente.
 
 ## Estado actual del proyecto
 
@@ -190,6 +191,23 @@ Por ejemplo:
 - "Carlos" muestra Villa Carlos Paz.
 
 Si no existen coincidencias, se muestra un mensaje indicando que no se encontraron destinos.
+
+## Funcionamiento del filtro por región o valle
+
+La aplicación permite filtrar los destinos turísticos según su región o valle.
+
+Se incorporaron botones horizontales para seleccionar entre:
+
+- Todos.
+- Valle de Punilla.
+- Valle de Calamuchita.
+- Valle de Traslasierra.
+- Valle de Paravachasca.
+- Región de Ansenuza.
+
+Al seleccionar una región, la lista muestra únicamente los destinos que pertenecen a ella.
+
+El filtro puede utilizarse junto con el buscador por nombre, permitiendo combinar ambas opciones.
 
 ## Detalle de los destinos
 
