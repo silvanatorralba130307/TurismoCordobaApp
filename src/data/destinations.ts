@@ -106,4 +106,31 @@ export const destinations = [
       'Realizar cabalgatas',
     ],
   },
+{
+  id: 5,
+  name: 'Capilla del Monte',
+  region: 'Valle de Punilla',
+  description:
+    'Destino serrano reconocido por el Cerro Uritorco, sus formaciones rocosas, senderos y paisajes naturales.',
+  image: require('../../assets/images/capilla-del-monte.png'),
+  latitude: -30.8572,
+  longitude: -64.5263,
+
+  placesToVisit: [
+    'Cerro Uritorco',
+    'Los Terrones',
+    'El Zapato',
+    'Dique El Cajón',
+    'Calle Techada',
+  ],
+
+  activities: [
+    'Realizar trekking y senderismo',
+    'Visitar miradores y formaciones rocosas',
+    'Practicar avistaje de aves',
+    'Recorrer espacios naturales y balnearios',
+    'Disfrutar de paseos por el centro y la Calle Techada',
+  ],
+},
+
 ];

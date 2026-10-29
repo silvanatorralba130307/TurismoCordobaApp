@@ -54,6 +54,7 @@ Los destinos incluidos actualmente son:
 - La Cumbrecita.
 - Mina Clavero.
 - Villa General Belgrano.
+- Capilla del Monte.
 
 ## Información disponible por destino
 
