@@ -55,6 +55,7 @@ Los destinos incluidos actualmente son:
 - Mina Clavero.
 - Villa General Belgrano.
 - Capilla del Monte.
+- Alta Gracia.
 
 ## Información disponible por destino
 

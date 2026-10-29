@@ -133,4 +133,31 @@ export const destinations = [
   ],
 },
 
+{
+  id: 6,
+  name: 'Alta Gracia',
+  region: 'Valle de Paravachasca',
+  description:
+    'Ciudad turística de gran valor histórico y cultural, reconocida por su legado jesuítico, sus museos y sus espacios naturales.',
+  image: require('../../assets/images/alta-gracia.png'),
+  latitude: -31.64978,
+  longitude: -64.42972,
+
+  placesToVisit: [
+    'Estancia Jesuítica de Alta Gracia',
+    'Tajamar',
+    'Museo Casa del Che',
+    'Museo Manuel de Falla',
+    'Gruta de la Virgen de Lourdes',
+  ],
+
+  activities: [
+    'Realizar recorridos históricos y culturales',
+    'Visitar museos y sitios patrimoniales',
+    'Caminar por la costanera del arroyo Chicamtoltina',
+    'Disfrutar de espacios verdes y paseos al aire libre',
+    'Realizar cabalgatas, ciclismo y senderismo',
+  ],
+},
+
 ];
