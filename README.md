@@ -26,6 +26,7 @@ El proyecto se desarrolla de manera incremental durante la cursada, incorporando
 | Consultar hospedajes, restaurantes y lugares turísticos en Google Maps | Implementado |
 | Consultar el destino más cercano según la ubicación actual | Implementado |
 | Filtrar destinos por región o valle | Implementado |
+| Crear y compartir una postal de viaje | Implementado |
 
 ## Features pendientes
 
@@ -181,6 +182,29 @@ Se implementaron:
 
 De esta manera, el usuario puede conocer rápidamente cuál de los destinos disponibles en la aplicación se encuentra más cerca de su ubicación actual.
 
+### Postal de viaje con cámara, galería y compartir
+
+Se incorporó la posibilidad de crear una postal personalizada desde la pantalla de detalle de cada destino.
+
+Se implementaron:
+
+- Selección de una imagen desde la galería del dispositivo.
+- Captura de una nueva fotografía utilizando la cámara.
+- Solicitud de permisos para acceder a la galería y a la cámara.
+- Creación de una postal con la imagen seleccionada.
+- Incorporación automática del nombre del destino.
+- Visualización del texto "Saludos desde".
+- Visualización de "Córdoba, Argentina".
+- Captura de la postal completa como una imagen.
+- Compartir la postal mediante las aplicaciones disponibles en el dispositivo.
+- Limpieza de la postal de la pantalla una vez compartida.
+
+Para esta funcionalidad se utilizaron:
+
+- `expo-image-picker`.
+- `react-native-view-shot`.
+- `expo-sharing`.
+
 ## Funcionamiento del buscador
 
 El usuario puede ingresar parte del nombre de un destino en el campo de búsqueda.
@@ -269,4 +293,7 @@ Cada destino utiliza una `queryKey` diferente, permitiendo que TanStack Query ad
 - Linking.
 - Open-Meteo API.
 - Expo Location.
+- Expo Image Picker.
+- React Native View Shot.
+- Expo Sharing.
 

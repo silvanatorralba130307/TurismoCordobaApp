@@ -1,8 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { SymbolView } from 'expo-symbols';
+
+import * as ImagePicker from 'expo-image-picker';
+import * as Sharing from 'expo-sharing';
+import { captureRef } from 'react-native-view-shot';
 
 import { useLocalSearchParams, useRouter } from 'expo-router';
 
@@ -32,9 +36,14 @@ export default function DetailScreen() {
   const { id } = useLocalSearchParams<{ id?: string }>();
   const router = useRouter();
   const scrollRef = useRef<ScrollView>(null);
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const postalRef = useRef<View>(null);
+
   const favoriteIds = useFavoritesStore(
-  (state) => state.favoriteIds
-);
+    (state) => state.favoriteIds
+  );
 
 const toggleFavorite = useFavoritesStore(
   (state) => state.toggleFavorite
@@ -43,6 +52,67 @@ const toggleFavorite = useFavoritesStore(
   const destination = destinations.find(
     (item) => item.id === Number(id)
   );
+
+const pickImage = async () => {
+  const permissionResult =
+    await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+  if (!permissionResult.granted) {
+    alert('Necesitamos permiso para acceder a tus fotos.');
+    return;
+  }
+
+  const result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ['images'],
+    allowsEditing: true,
+    quality: 1,
+  });
+
+  if (!result.canceled) {
+    setSelectedImage(result.assets[0].uri);
+  }
+};
+
+const takePhoto = async () => {
+  const permissionResult =
+    await ImagePicker.requestCameraPermissionsAsync();
+
+  if (!permissionResult.granted) {
+    alert('Necesitamos permiso para usar la cámara.');
+    return;
+  }
+
+  const result = await ImagePicker.launchCameraAsync({
+    allowsEditing: true,
+    quality: 1,
+  });
+
+  if (!result.canceled) {
+    setSelectedImage(result.assets[0].uri);
+  }
+};
+
+const sharePostal = async () => {
+  if (!postalRef.current) {
+    return;
+  }
+
+  const sharingAvailable = await Sharing.isAvailableAsync();
+
+  if (!sharingAvailable) {
+    alert('No se puede compartir desde este dispositivo.');
+    return;
+  }
+
+  const imageUri = await captureRef(postalRef, {
+    format: 'jpg',
+    quality: 0.9,
+  });
+
+  await Sharing.shareAsync(imageUri);
+  
+  setSelectedImage(null);
+};
 
   const openHotels = () => {
     if (!destination) return;
@@ -155,14 +225,68 @@ const {
 )}
 
   <Text style={styles.favoriteText}>
-    {isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'}
-  </Text>
+  {isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'}
+</Text>
 
 </TouchableOpacity>
-          <Text style={styles.description}>
-            {destination.description}
-          </Text>
-          <Text style={styles.sectionTitle}>
+
+<Text style={styles.description}>
+  {destination.description}
+</Text>
+
+<TouchableOpacity
+  style={styles.postalButton}
+  onPress={pickImage}
+>
+  <Text style={styles.postalButtonText}>
+    📸 Crear postal de viaje
+  </Text>
+</TouchableOpacity>
+
+<TouchableOpacity
+  style={styles.cameraButton}
+  onPress={takePhoto}
+>
+  <Text style={styles.cameraButtonText}>
+    📷 Sacar foto
+  </Text>
+</TouchableOpacity>
+
+{selectedImage && (
+  <View ref={postalRef} style={styles.postalContainer}>
+    <Image
+      source={{ uri: selectedImage }}
+      style={styles.postalImage}
+    />
+
+    <View style={styles.postalTextContainer}>
+      <Text style={styles.postalGreeting}>
+        Saludos desde
+      </Text>
+
+      <Text style={styles.postalDestination}>
+        {destination.name}
+      </Text>
+
+      <Text style={styles.postalRegion}>
+        Córdoba, Argentina
+      </Text>
+    </View>
+  </View>
+)}
+
+{selectedImage && (
+  <TouchableOpacity
+    style={styles.shareButton}
+    onPress={sharePostal}
+  >
+    <Text style={styles.shareButtonText}>
+      📤 Compartir postal
+    </Text>
+  </TouchableOpacity>
+)}
+
+<Text style={styles.sectionTitle}>
   Lugares para visitar
 </Text>
 
@@ -407,6 +531,93 @@ serviceButton: {
 },
 
 serviceButtonText: {
+  color: '#ffffff',
+  fontSize: 16,
+  fontWeight: '600',
+},
+
+postalButton: {
+  backgroundColor: '#4d8b6e',
+  paddingVertical: 14,
+  paddingHorizontal: 16,
+  borderRadius: 12,
+  marginTop: 20,
+  alignItems: 'center',
+},
+
+postalButtonText: {
+  color: '#ffffff',
+  fontSize: 16,
+  fontWeight: '600',
+},
+
+postalContainer: {
+  marginTop: 16,
+  borderRadius: 16,
+  overflow: 'hidden',
+  backgroundColor: '#ffffff',
+  elevation: 3,
+},
+
+postalImage: {
+  width: '100%',
+  height: 260,
+},
+
+postalTextContainer: {
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  right: 0,
+  backgroundColor: 'rgba(0, 0, 0, 0.45)',
+  paddingVertical: 16,
+  paddingHorizontal: 14,
+},
+
+postalGreeting: {
+  color: '#ffffff',
+  fontSize: 16,
+  fontWeight: '600',
+},
+
+postalDestination: {
+  color: '#ffffff',
+  fontSize: 28,
+  fontWeight: 'bold',
+  marginTop: 4,
+},
+
+postalRegion: {
+  color: '#f1f1f1',
+  fontSize: 14,
+  marginTop: 4,
+},
+
+shareButton: {
+  backgroundColor: '#244c3a',
+  paddingVertical: 14,
+  paddingHorizontal: 16,
+  borderRadius: 12,
+  marginTop: 14,
+  alignItems: 'center',
+},
+
+shareButtonText: {
+  color: '#ffffff',
+  fontSize: 16,
+  fontWeight: '600',
+},
+
+cameraButton: {
+  backgroundColor: '#6d8f7d',
+  paddingVertical: 14,
+  paddingHorizontal: 16,
+  borderRadius: 12,
+  marginTop: 10,
+  alignItems: 'center',
+},
+
+cameraButtonText: {
   color: '#ffffff',
   fontSize: 16,
   fontWeight: '600',
