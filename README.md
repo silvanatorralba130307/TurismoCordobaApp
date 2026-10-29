@@ -24,6 +24,7 @@ El proyecto se desarrolla de manera incremental durante la cursada, incorporando
 | Consultar una lista de destinos favoritos | Implementado |
 | Consultar el clima actual de un destino | Implementado |
 | Consultar hospedajes, restaurantes y lugares turísticos en Google Maps | Implementado |
+| Consultar el destino más cercano según la ubicación actual | Implementado |
 
 ## Features pendientes
 
@@ -159,6 +160,23 @@ Se implementaron:
 
 De esta manera, el usuario puede consultar información turística dentro de la aplicación y, cuando necesita ampliar la búsqueda, acceder directamente a Google Maps.
 
+## Clase 4 - APIs nativas y sensores
+
+### Ubicación con Expo Location
+
+Se incorporó `expo-location` para utilizar la ubicación actual del dispositivo.
+
+Se implementaron:
+
+- Solicitud de permiso de ubicación mientras se utiliza la aplicación.
+- Obtención de la latitud y longitud actual del usuario.
+- Comparación de la ubicación del usuario con las coordenadas de los destinos turísticos.
+- Cálculo de la distancia aproximada entre el usuario y cada destino.
+- Identificación automática del destino más cercano.
+- Visualización del nombre del destino más próximo y su distancia aproximada en kilómetros.
+
+De esta manera, el usuario puede conocer rápidamente cuál de los destinos disponibles en la aplicación se encuentra más cerca de su ubicación actual.
+
 ## Funcionamiento del buscador
 
 El usuario puede ingresar parte del nombre de un destino en el campo de búsqueda.
@@ -229,4 +247,5 @@ Cada destino utiliza una `queryKey` diferente, permitiendo que TanStack Query ad
 - TanStack Query.
 - Linking.
 - Open-Meteo API.
+- Expo Location.
 

@@ -1,22 +1,83 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
+import * as Location from 'expo-location';
 
 import {
   FlatList,
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
+
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import DestinationCard from '../components/DestinationCard';
 import { destinations } from '../data/destinations';
 
+const calculateDistance = (
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number
+) => {
+  const R = 6371;
+
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return R * c;
+};
+
 export default function HomeScreen() {
   const [search, setSearch] = useState('');
+  const [nearestDestination, setNearestDestination] = useState<string | null>(null);
   const router = useRouter();
+
+  const getCurrentLocation = async () => {
+  const { status } =
+    await Location.requestForegroundPermissionsAsync();
+
+  if (status !== 'granted') {
+    alert('Necesitamos permiso para acceder a tu ubicación.');
+    return;
+  }
+
+  const location = await Location.getCurrentPositionAsync({});
+
+  const userLatitude = location.coords.latitude;
+const userLongitude = location.coords.longitude;
+
+const destinationsWithDistance = destinations.map((destination) => ({
+  ...destination,
+  distance: calculateDistance(
+    userLatitude,
+    userLongitude,
+    destination.latitude,
+    destination.longitude
+  ),
+}));
+
+const nearest = destinationsWithDistance.reduce((previous, current) =>
+  current.distance < previous.distance ? current : previous
+);
+
+setNearestDestination(
+  `${nearest.name} - ${nearest.distance.toFixed(1)} km`
+);
+};
+  
   
   const filteredDestinations = destinations.filter((destination) =>
     destination.name.toLowerCase().includes(search.toLowerCase())
@@ -58,7 +119,19 @@ export default function HomeScreen() {
         Conocé algunos de los lugares más elegidos para disfrutar de la
         naturaleza, la cultura y los paisajes de Córdoba.
       </Text>
-
+      <TouchableOpacity
+        style={styles.locationButton}
+        onPress={getCurrentLocation}
+>
+      <Text style={styles.locationButtonText}>
+       📍 Destinos cerca de mí
+      </Text>
+      </TouchableOpacity>
+      {nearestDestination && (
+  <Text style={styles.nearestDestinationText}>
+    Destino más cercano: {nearestDestination}
+  </Text>
+)}
       <TextInput
         style={styles.searchInput}
         placeholder="Buscar destino..."
@@ -138,4 +211,27 @@ const styles = StyleSheet.create({
     color: '#606c66',
     marginTop: 20,
   },
+
+  locationButton: {
+  backgroundColor: '#244c3a',
+  paddingVertical: 14,
+  paddingHorizontal: 16,
+  borderRadius: 12,
+  marginBottom: 12,
+  alignItems: 'center',
+},
+
+locationButtonText: {
+  color: '#ffffff',
+  fontSize: 16,
+  fontWeight: '600',
+},
+
+nearestDestinationText: {
+  fontSize: 16,
+  color: '#244c3a',
+  fontWeight: '600',
+  marginBottom: 12,
+  textAlign: 'center',
+},
 });
